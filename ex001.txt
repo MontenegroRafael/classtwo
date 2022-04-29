@@ -1,0 +1,27 @@
+//  Escreva um programa que receba dez nomes de pessoas e apresente-os na tela; 
+
+using System;
+
+namespace ex001
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] nomes = new string[10];
+            int i;
+
+            for (i = 0; i < 10; i++)
+            {
+                Console.Write("Digite o {0}° nome: ", i+1);
+                nomes[i] = Console.ReadLine();
+            }
+            Console.WriteLine("====================================");
+            Console.WriteLine("Os Nomes digitados foram:");
+            for (i = 0; i < 10; i++)
+            {
+                Console.WriteLine(nomes[i]);
+            }
+        }
+    }
+}

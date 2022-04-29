@@ -1,0 +1,31 @@
+//  Faça um programa que receba um número indefinido de entradas e calcule a média de todas elas. 
+
+using System;
+
+namespace ex002
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double n, soma = 0, contador = 0;
+            string resp;
+         
+            do
+            {
+                Console.WriteLine("Digite um número : ");
+                n = Convert.ToSingle(Console.ReadLine());
+                soma = soma + n;
+                contador = contador + 1;
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("Deseja digitar mais um número [S/N]: ");
+                resp = Console.ReadLine();
+            }
+            while (resp == "S");
+            Console.WriteLine("=====================================");
+            Console.WriteLine("Foi digitados {0} número(s) a média de todos é {1}.", contador, (soma/contador));
+
+
+        }
+    }
+}

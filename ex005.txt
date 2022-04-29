@@ -1,0 +1,28 @@
+//  Faça um programa que receba 10 entradas de textos e mostre todos eles intercalados do caractere “—OU—“. 
+
+using System;
+
+namespace ex005
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] nomes = new string[3];
+            int i;
+
+            for (i = 0; i < 3; i++)
+            {
+                Console.Write("Digite o {0}° nome: ", i + 1);
+                nomes[i] = Console.ReadLine();
+            }
+            Console.WriteLine("====================================");
+            for (i = 0; i < 3; i++)
+            {
+                Console.Write("{0} ou ", nomes[i]);
+                Console.WriteLine("====================================");
+            }
+            
+        }
+    }
+}

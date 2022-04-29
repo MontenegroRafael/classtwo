@@ -1,0 +1,45 @@
+//  Faça um programa que receba as notas de 10 alunos e mostre a média das notas, a maior e a menor. 
+
+using System;
+
+namespace ex003
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double nota, soma = 0, contador = 0, maior = 0, menor = 0, media = 0;
+            int i;
+
+            for(i = 0; i < 10; i = i + 1)
+            {
+                Console.WriteLine("Digite a {0}° nota: ", i+1);
+                nota = Convert.ToSingle(Console.ReadLine());
+                soma = soma + nota;
+                contador = contador + 1;
+                if (contador == 1)
+                {
+                    maior = nota;
+                    menor = nota;
+                }
+                else
+                {
+                    if (nota > maior)
+                    {
+                        maior = nota;
+                    }
+                    if (nota < menor)
+                    {
+                        menor = nota;
+                    }
+                }
+            }
+            media = soma / contador;
+            Console.WriteLine("========================================");
+            Console.WriteLine("A média das notas é {0}.", media); 
+            Console.WriteLine("A maior nota é {0}.", maior);
+            Console.WriteLine("A menor nota é {0}.", menor);
+
+        }
+    }
+}
