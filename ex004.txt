@@ -1,0 +1,87 @@
+//  Faça um programa que receba o número de entradas (as entradas devem ser de valores inteiros),
+//  mostre se há elementos repetidos e quantas vezes estes se repetem. 
+
+using System;
+using System.Collections.Generic;  // pra usar os dicionários
+
+namespace ex004
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int entrada, i, contador, soma;
+            contador = 0;
+            soma = 0;
+
+            Dictionary<int, int> myDict = new Dictionary<int, int>();
+
+            Console.WriteLine("===========================================");
+            Console.Write("Digite quantos valores deseja cadastrar: ");
+            entrada = Convert.ToInt32(Console.ReadLine());
+
+            int[] valores = new int[entrada];
+            int[] repetidos = new int[entrada];
+            int[] repeticoes = new int[entrada];
+            
+            Console.WriteLine("===========================================");
+            for (i = 0; i < entrada; i = i + 1)
+            {
+                Console.Write("Digite o {0}° valor: ", i + 1);
+                valores[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            Console.WriteLine("===========================================");
+            while (contador < entrada)
+            {
+                soma = 0;
+                for (i = 0; i < entrada; i = i + 1)
+                {
+                    if(valores[contador] == valores[i])
+                    {
+                        soma = soma + 1;
+                    }
+                
+                
+                }
+                repeticoes[contador] = soma;
+                Console.WriteLine("{0} repete {1} vez(es)", valores[contador], soma);
+                contador = contador + 1;
+            }
+            Console.WriteLine("===========================================");
+            contador = 0;
+            char[] valoreschar = new char[entrada];
+            for(i = 0; i < entrada; i = i + 1)
+            {
+                valoreschar[i] = Convert.ToChar(valores[i]);
+            }
+            foreach (char b in valoreschar)
+            {
+            Console.WriteLine($"{valoreschar},{});
+            
+            }
+            for (i = 0; i < entrada; i = i + 1)
+            {
+                if (valores[i] == contador)
+                {
+                    Console.WriteLine("0} repete {1} vezes", valores[i], repeticoes[i]);
+                }
+                    
+            contador = contador + 1;
+            }
+                
+
+        }
+
+
+        //string texto = "senac dentro de senac";
+            //foreach
+            //para itere para cada char "b" na cadeia de caracteres 
+            //foreach (char b in texto)
+            //{
+                //texto.IndexOf(b) encontra a primeira ocorrência da letra em "b" e retorna sua posição no array.
+                //Console.WriteLine($"Texto na posição {texto.IndexOf(b)}, {b}");
+            //}
+  
+    //  Console.WriteLine("{0} repete {1} vez(es)", valores[contador], soma);
+}
+}
