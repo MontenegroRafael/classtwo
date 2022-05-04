@@ -66,18 +66,24 @@ namespace ex007
                             decimal saldo = saldos[i];  // recebe o saldo atual da conta digitada
                             Console.Write("Digite o valor para Saque R$:");
                             decimal ValorSaque = Convert.ToDecimal(Console.ReadLine());  //  recebe o valor do saque
-
-                            Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-                            if (ValorSaque > saldo)  //  se o valor de saque for maoir que o saldo da conta digitada
+                            while (ValorSaque > saldo)
                             {
+                                Console.WriteLine("--------------------------------------");
                                 Console.WriteLine("** Saldo Insuficiente! **");
-
+                                Console.Write("Digite outro valor para Saque R$:");
+                                ValorSaque = Convert.ToDecimal(Console.ReadLine());  //  recebe o valor do saque
                             }
-                            else if (ValorSaque <= saldo)  //  se o valor de saque for menor igual ao saldo da conta digitada
+                            Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+                            //if (ValorSaque > saldo)  //  se o valor de saque for maoir que o saldo da conta digitada
+                            //{
+                                //Console.WriteLine("** Saldo Insuficiente! **");
+
+                            //}
+                            if (ValorSaque <= saldo)  //  se o valor de saque for menor igual ao saldo da conta digitada
                             {
                                 saldos[i] = (saldos[i] - ValorSaque);  //  muda o valor do saldo debitado dentro do vetor de saldos
                                 Console.WriteLine(" ** Saque Realizado **");
-                                Console.WriteLine("O saldo da conta{0} agora é R${1}", contas[i], saldos[i]);  //  mostra o saldo atualizado da conta.
+                                Console.WriteLine("O saldo da conta {0} agora é R${1}", contas[i], saldos[i]);  //  mostra o saldo atualizado da conta.
                             }
                         }
                     }
@@ -97,7 +103,7 @@ namespace ex007
                             Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                             saldos[i] = (saldos[i] + ValorDeposito);  // muda o valor do saldo da conta para o deposito
                             Console.WriteLine(" ** Deposito Realizado **");
-                            // Console.WriteLine("O saldo da conta{0} agora é R${1}", contas[i], saldos[i]);
+                            // Console.WriteLine("O saldo da conta {0} agora é R${1}", contas[i], saldos[i]);
                         }
                     }
                 }
@@ -114,15 +120,22 @@ namespace ex007
                             decimal saldo = saldos[i];  // saldo se torna o valor que será operado
                             Console.Write("Digite o valor que será Tranferido R$:");
                             decimal ValorTransferido = Convert.ToDecimal(Console.ReadLine());  // recebe o valor para transferência
+                            while (ValorTransferido > saldo)
+                            {
+                                Console.WriteLine("--------------------------------------");
+                                Console.WriteLine("** Saldo Insuficiente! **");
+                                Console.Write("Digite o valor que será Tranferido R$:");
+                                ValorTransferido = Convert.ToDecimal(Console.ReadLine());  // recebe o valor para transferência
+                            }
                             Console.Write("Digite a conta para Crédito: ");
                             int ccr = Convert.ToInt32(Console.ReadLine());  // recebe a conta para Crédito.(conta corrente recebedora)
                             Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-                            if (ValorTransferido > saldo)
-                            {
-                                Console.WriteLine("** Saldo Insuficiente! **");
+                            //if (ValorTransferido > saldo)
+                            //{
+                                //Console.WriteLine("** Saldo Insuficiente! **");
 
-                            }
-                            else if (ValorTransferido <= saldo)
+                            //}
+                            if (ValorTransferido <= saldo)
                             {
                                 saldos[i] = (saldos[i] - ValorTransferido);
                                 for (int j = 0; j < 5; j = j + 1)
