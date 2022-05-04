@@ -5,7 +5,7 @@
 //  1 - Sacar: o usuário deve indicar a conta da qual fará o saque (esta deve possuir saldo suficiente para a operação);
 //  2 - Depositar: o usuário deve indicar para qual conta irá o valor;
 //  3 - Transferir: o usuário deve indicar de qual conta sairá (esta deve ter saldo suficiente para a operação), o valor da
-//  transferência e para qual conta irá os valores.
+//       transferência e para qual conta irá os valores.
 //  0 - Para finalizar a execução do programa;
 
 using System;
@@ -18,6 +18,7 @@ namespace ex007
         {
             int[] contas = new int[5];
             decimal[] saldos = new decimal[5];
+            int resp;
             
             
             Console.WriteLine("------------------------------------------");
@@ -26,20 +27,20 @@ namespace ex007
             Console.WriteLine(" ** Primeiro acesso ** ");
             Console.WriteLine(" ** Cadastre 5 contas e seus saldos respectivamente....");
             
-            for (int i = 0; i < 5; i = i + 1)
+            for (int i = 0; i < 5; i = i + 1)  //  repete 5 vezes para cadastrar 5 contas e seus saldos.
             {
                 Console.WriteLine("--------------------------------------");
                 Console.WriteLine("Digite - N° e Saldo da {0}° conta:", i+1);
-                Console.Write("Conta (4 digitos): ");
-                contas[i] = Convert.ToInt32(Console.ReadLine());
+                Console.Write("N° da Conta (4 digitos): ");
+                contas[i] = Convert.ToInt32(Console.ReadLine());  // pega o número da conta
                 Console.Write("Saldo R$: ");
-                saldos[i] = Convert.ToDecimal(Console.ReadLine());
+                saldos[i] = Convert.ToDecimal(Console.ReadLine()); // registra o saldo
             }
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("-=-= Contas e Saldos Cadastrados =-=-");
-            for (int i = 0; i < 5; i = i + 1)
+            for (int i = 0; i < 5; i = i + 1)  // vai varrer os vetores de Contas e Saldos
             {
-                Console.WriteLine(" Conta {0} => Saldo R${1}",contas[i], saldos[i]);
+                Console.WriteLine("  - Conta {0} => Saldo R${1}",contas[i], saldos[i]);
             }
             Console.WriteLine("------------------------------------------");
             Console.WriteLine(" ** Qual operação deseja fazer? **");
@@ -48,30 +49,128 @@ namespace ex007
             Console.WriteLine("[3] - Transferir");
             Console.WriteLine("[0] - Finalizar");
             Console.Write("Digite o Cód. da operação: ");
-            int resp = Convert.ToInt32(Console.ReadLine());
+            resp = Convert.ToInt32(Console.ReadLine());  // recebe a opção do usuario.
             Console.WriteLine("------------------------------------------");
-            if (resp == 1)
+            while (resp != 0)
             {
-                Console.WriteLine("Saque");
-                Console.Write("Digite a conta para saque: ");
-                int cc = Convert.ToInt32(Console.ReadLine());
-                for (int i = 0; i < 5; i = i + 1)
+                if (resp == 1)  // se a opção for Sacar
                 {
-                    if (cc == contas[i])
+                    Console.WriteLine("=> Saque");
+                    Console.Write("Digite a conta para saque: ");
+                    int cc = Convert.ToInt32(Console.ReadLine());  // recebe a conta para saque.
+                    for (int i = 0; i < 5; i = i + 1)  // vai varer procurando a conta para saque
                     {
-                        Console.WriteLine("Conta {0} tem Saldo = R${1}", contas[i], saldos[i]);
-                        decimal saldo = saldos[i];
-                        Console.Write("Digite o valor para Saque R$:");
-                        decimal ValorSaque = Convert.ToDecimal(Console.ReadLine());
-                        if (ValorSaque > saldo)
+                        if (cc == contas[i])  // se encontarr a conta
                         {
-                            Console.WriteLine("Saldo Insuficiente!");
+                            Console.WriteLine("Conta {0} tem Saldo = R${1}", contas[i], saldos[i]);
+                            decimal saldo = saldos[i];  // recebe o saldo atual da conta digitada
+                            Console.Write("Digite o valor para Saque R$:");
+                            decimal ValorSaque = Convert.ToDecimal(Console.ReadLine());  //  recebe o valor do saque
+
+                            Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+                            if (ValorSaque > saldo)  //  se o valor de saque for maoir que o saldo da conta digitada
+                            {
+                                Console.WriteLine("** Saldo Insuficiente! **");
+
+                            }
+                            else if (ValorSaque <= saldo)  //  se o valor de saque for menor igual ao saldo da conta digitada
+                            {
+                                saldos[i] = (saldos[i] - ValorSaque);  //  muda o valor do saldo debitado dentro do vetor de saldos
+                                Console.WriteLine(" ** Saque Realizado **");
+                                Console.WriteLine("O saldo da conta{0} agora é R${1}", contas[i], saldos[i]);  //  mostra o saldo atualizado da conta.
+                            }
                         }
                     }
                 }
-                
-                
+                else if (resp == 2)
+                {
+                    Console.WriteLine("=> Depósito");
+                    Console.Write("Digite a conta para deposito: ");
+                    int cc = Convert.ToInt32(Console.ReadLine());  // recebe a conta para o deposito.
+                    for (int i = 0; i < 5; i = i + 1)  // vai varer procurando a conta para o deposito
+                    {
+                        if (cc == contas[i])  // se achar a conta
+                        {
+                            decimal saldo = saldos[i];  // recebe o saldo atual da conta para deposito
+                            Console.Write("Digite o valor para Deposito R$:");
+                            decimal ValorDeposito = Convert.ToDecimal(Console.ReadLine());  // recebe o valor do deposito
+                            Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+                            saldos[i] = (saldos[i] + ValorDeposito);  // muda o valor do saldo da conta para o deposito
+                            Console.WriteLine(" ** Deposito Realizado **");
+                            // Console.WriteLine("O saldo da conta{0} agora é R${1}", contas[i], saldos[i]);
+                        }
+                    }
+                }
+                else if (resp == 3)
+                {
+                    Console.WriteLine("=> Transferência");
+                    Console.Write("Digite a conta para Débito: ");
+                    int cc = Convert.ToInt32(Console.ReadLine());  // recebe a conta para tranferência.
+                    for (int i = 0; i < 5; i = i + 1)  // vai varer procurando a conta para débito
+                    {
+                        if (cc == contas[i])
+                        {
+                            Console.WriteLine("Conta {0} tem Saldo = R${1}", contas[i], saldos[i]);  // mostra o saldo da conta para débito
+                            decimal saldo = saldos[i];  // saldo se torna o valor que será operado
+                            Console.Write("Digite o valor que será Tranferido R$:");
+                            decimal ValorTransferido = Convert.ToDecimal(Console.ReadLine());  // recebe o valor para transferência
+                            Console.Write("Digite a conta para Crédito: ");
+                            int ccr = Convert.ToInt32(Console.ReadLine());  // recebe a conta para Crédito.(conta corrente recebedora)
+                            Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+                            if (ValorTransferido > saldo)
+                            {
+                                Console.WriteLine("** Saldo Insuficiente! **");
+
+                            }
+                            else if (ValorTransferido <= saldo)
+                            {
+                                saldos[i] = (saldos[i] - ValorTransferido);
+                                for (int j = 0; j < 5; j = j + 1)
+                                {
+                                    if (ccr == contas[j])
+                                    {
+                                        Console.WriteLine("Conta {0} tem Saldo = R${1}", contas[j], saldos[j]);
+                                        saldos[j] = (saldos[j] + ValorTransferido);
+                                        Console.WriteLine(" ** Tranferencia Realizada **");
+                                        Console.WriteLine("O saldo da conta {0} agora é R${1}", ccr, saldos[j]);
+                                    }
+                                    
+                                    
+                                }
+                                
+
+                            }
+
+                        }
+                        
+                    }
+
+
+                }
+                else
+                {
+                    Console.WriteLine(" ** Opção Invalida! ** ");
+                }
+                Console.WriteLine("------------------------------------------");
+                Console.WriteLine("Deseja fazer outra Operação? ");
+                Console.WriteLine(" ** Qual operação deseja fazer? **");
+                Console.WriteLine("[1] - Sacar");
+                Console.WriteLine("[2] - Depositar");
+                Console.WriteLine("[3] - Transferir");
+                Console.WriteLine("[0] - Finalizar");
+                Console.Write("Digite o Cód. da operação: ");
+                resp = Convert.ToInt32(Console.ReadLine());
+
             }
+                Console.WriteLine("------------------------------------------");
+                Console.WriteLine(" ** Operação Finalizada! **");
+                Console.WriteLine("-=-= Contas e Saldos ATUALIZADOS! =-=-");
+                for (int i = 0; i < 5; i = i + 1)
+                {
+                    Console.WriteLine("  -  Conta {0} => Saldo R${1}", contas[i], saldos[i]);
+                }
+
+
 
         }
     }
